@@ -1,0 +1,51 @@
+﻿@using Rockstar.ViewModels.Review
+@model Rockstar.ViewModels.Review.SearchReviewViewModel
+
+
+
+
+   
+
+
+
+
+<script type="text/javascript" language="javascript">
+
+    $(document).ready(function () {
+        $("#searchbox").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/ShowReview/AutoComplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.name, value: item.name };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+    
+
+
+
+    <div class="searchbalk">
+		<form method="post" asp-action="SearchResults" asp-controller="ShowReview">
+			<input class="form-control" type="text" placeholder="Search..." asp-for="SearchWord" id="searchbox" />
+
+			<div class="buttonsubmit">
+				<button class="btn btn-default" type="submit">Search</button>
+
+			</div>
+
+		</form>
+    </div>
+    

@@ -1,0 +1,31 @@
+﻿@model Rockstar.ViewModels.Account.CompanyProfileViewModel
+
+@{
+	ViewData["Title"] = "CompanyProfile";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CompanyProfile</h2>
+
+@Model.Company.Email
+@Model.Company.Employee
+@Model.Company.Info
+@Model.Company.Location
+@Model.Company.Name
+@Model.Company.TelephoneNr
+
+@foreach (var item in Model.Reviews)
+{
+	@item.Overall;
+	@item.Function;
+	@item.Explanation;
+	@item.StartDate;
+	@item.EndDate;
+	
+	@foreach (var cat in item.Categories)
+	{
+		@cat.Name;
+		@cat.Rating;
+		@cat.Explanation;
+	}
+}
